@@ -1,0 +1,846 @@
+/* Reusable UI Components */
+
+/* Form Field Components */
+.form-field-compact {
+    .mat-mdc-form-field {
+        margin-bottom: var(--space-2) !important;
+
+        .mat-mdc-text-field-wrapper {
+            height: 32px !important;
+        }
+
+        .mdc-text-field {
+            height: 32px !important;
+            font-size: 12px !important;
+        }
+
+        .mat-mdc-form-field-input-control input {
+            font-size: 12px !important;
+            height: 18px !important;
+            padding: 4px 8px !important;
+        }
+
+        .mat-mdc-floating-label {
+            font-size: 12px !important;
+            top: 14px !important;
+        }
+
+        .mat-mdc-select-value {
+            font-size: 12px !important;
+            line-height: 18px !important;
+        }
+
+        .mat-mdc-form-field-error {
+            font-size: 10px !important;
+            line-height: 12px !important;
+        }
+
+        .mat-mdc-form-field-error-wrapper {
+            padding-top: 2px !important;
+        }
+
+        /* Outline appearance specific fixes */
+        &.mat-form-field-appearance-outline {
+            .mat-mdc-text-field-wrapper {
+                height: 32px !important;
+
+                .mat-mdc-form-field-flex {
+                    height: 32px !important;
+                    align-items: center !important;
+                }
+
+                .mat-mdc-form-field-infix {
+                    padding: 0 8px !important;
+                    border-top: none !important;
+                }
+            }
+
+            .mat-mdc-form-field-icon-suffix {
+                height: 32px !important;
+                width: 32px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .mat-datepicker-toggle {
+                height: 20px !important;
+                width: 20px !important;
+
+                button {
+                    height: 20px !important;
+                    width: 20px !important;
+
+                    .mat-datepicker-toggle-default-icon {
+                        width: 16px !important;
+                        height: 16px !important;
+                        font-size: 16px !important;
+                    }
+                }
+            }
+
+            .mat-mdc-select-arrow-wrapper {
+                height: 20px !important;
+                width: 20px !important;
+
+                .mat-mdc-select-arrow {
+                    transform: scale(0.8) !important;
+                }
+            }
+        }
+
+        /* Select dropdown arrow positioning */
+        .mat-mdc-select-arrow-wrapper {
+            height: 18px !important;
+            line-height: 18px !important;
+        }
+
+        .mat-mdc-select-arrow {
+            transform: scale(0.7) !important;
+            margin-top: -2px !important;
+        }
+
+        /* Datepicker icon positioning */
+        .mat-datepicker-toggle {
+            height: 18px !important;
+            width: 18px !important;
+            margin-top: -1px !important;
+        }
+
+        .mat-datepicker-toggle-default-icon {
+            width: 14px !important;
+            height: 14px !important;
+            font-size: 14px !important;
+        }
+
+        /* Suffix icons general positioning */
+        .mat-mdc-form-field-icon-suffix {
+            height: 18px !important;
+            width: 18px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+    }
+}
+
+.form-field-extra-compact {
+    .mat-mdc-form-field {
+        margin-bottom: var(--space-1) !important;
+
+        .mat-mdc-text-field-wrapper {
+            height: 28px !important;
+        }
+
+        .mdc-text-field {
+            height: 28px !important;
+        }
+
+        .mat-mdc-form-field-input-control input {
+            height: 16px !important;
+            padding: 2px 6px !important;
+            font-size: 11px !important;
+        }
+
+        .mat-mdc-floating-label {
+            top: 12px !important;
+            font-size: 11px !important;
+        }
+
+        .mat-mdc-select-value {
+            font-size: 11px !important;
+            line-height: 16px !important;
+        }
+
+        .mat-mdc-form-field-error {
+            font-size: 9px !important;
+            line-height: 10px !important;
+            margin-top: 1px !important;
+        }
+
+        .mat-mdc-form-field-error-wrapper {
+            padding-top: 1px !important;
+        }
+
+        .mat-mdc-select {
+            font-size: 11px !important;
+        }
+
+        .mat-mdc-select-arrow {
+            transform: scale(0.8) !important;
+        }
+
+        /* Select dropdown arrow positioning */
+        .mat-mdc-select-arrow-wrapper {
+            height: 16px !important;
+            line-height: 16px !important;
+        }
+
+        /* Datepicker icon positioning */
+        .mat-datepicker-toggle {
+            height: 16px !important;
+            width: 16px !important;
+            margin-top: -1px !important;
+        }
+
+        .mat-datepicker-toggle-default-icon {
+            width: 12px !important;
+            height: 12px !important;
+            font-size: 12px !important;
+        }
+
+        /* Suffix icons general positioning */
+        .mat-mdc-form-field-icon-suffix {
+            height: 16px !important;
+            width: 16px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+    }
+}
+
+/* Global Material Form Field Icon Fixes */
+.mat-mdc-form-field {
+
+    /* Fix for outline appearance specifically */
+    &.mat-form-field-appearance-outline {
+        .mat-mdc-text-field-wrapper {
+            .mat-mdc-form-field-flex {
+                align-items: center !important;
+                height: 100% !important;
+            }
+
+            .mat-mdc-form-field-infix {
+                display: flex !important;
+                align-items: center !important;
+                min-height: auto !important;
+            }
+        }
+
+        /* Datepicker toggle in outline fields */
+        .mat-datepicker-toggle {
+            position: relative !important;
+            top: auto !important;
+            right: auto !important;
+            transform: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 20px !important;
+            height: 20px !important;
+
+            button {
+                width: 20px !important;
+                height: 20px !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                min-width: auto !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+        }
+
+        /* Select arrow in outline fields */
+        .mat-mdc-select-arrow-wrapper {
+            position: relative !important;
+            top: auto !important;
+            right: auto !important;
+            transform: none !important;
+            margin: 0 !important;
+            width: 20px !important;
+            height: 20px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+
+            .mat-mdc-select-arrow {
+                margin: 0 !important;
+                transform: scale(0.8) !important;
+            }
+        }
+
+        /* All suffix icons in outline fields */
+        .mat-mdc-form-field-icon-suffix {
+            position: relative !important;
+            top: auto !important;
+            right: auto !important;
+            transform: none !important;
+            margin: 0 !important;
+            padding: 0 4px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            height: 100% !important;
+        }
+
+        /* Specific fix for matIconSuffix directive */
+        .mat-mdc-form-field-icon-suffix[matIconSuffix] {
+            position: absolute !important;
+            right: 8px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            z-index: 1 !important;
+            pointer-events: auto !important;
+        }
+    }
+
+    .mat-mdc-text-field-wrapper {
+        .mat-mdc-form-field-flex {
+            align-items: center !important;
+        }
+    }
+
+    /* Ensure all suffix icons are properly contained */
+    .mat-mdc-form-field-icon-suffix {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+    }
+
+    /* Datepicker toggle general fixes */
+    .mat-datepicker-toggle {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        button {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            min-width: auto !important;
+        }
+    }
+
+    /* Select arrow general fixes */
+    .mat-mdc-select-arrow-wrapper {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+}
+
+/* Specific fixes for Material Outline Form Fields */
+.mat-mdc-form-field.mat-form-field-appearance-outline {
+
+    /* Ensure proper icon positioning in outline fields */
+    .mat-mdc-form-field-icon-suffix {
+        position: absolute !important;
+        right: 12px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        z-index: 2 !important;
+        width: auto !important;
+        height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Datepicker toggle in outline appearance */
+    .mat-datepicker-toggle {
+        position: absolute !important;
+        right: 12px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        z-index: 2 !important;
+        width: 20px !important;
+        height: 20px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+
+        button {
+            width: 20px !important;
+            height: 20px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            min-width: auto !important;
+            border-radius: 50% !important;
+
+            .mat-datepicker-toggle-default-icon {
+                width: 16px !important;
+                height: 16px !important;
+                font-size: 16px !important;
+            }
+        }
+    }
+
+    /* Select dropdown arrow in outline appearance */
+    .mat-mdc-select-trigger {
+        .mat-mdc-select-arrow-wrapper {
+            position: absolute !important;
+            right: 12px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            z-index: 2 !important;
+            width: 20px !important;
+            height: 20px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+
+            .mat-mdc-select-arrow {
+                margin: 0 !important;
+                transform: scale(0.8) !important;
+            }
+        }
+    }
+
+    /* Adjust input padding to account for icons */
+    .mat-mdc-form-field-infix {
+        padding-right: 40px !important;
+    }
+}
+
+/* Button Components */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: var(--radius-md) !important;
+    font-size: var(--text-sm) !important;
+    font-weight: 500 !important;
+    padding: var(--space-2) var(--space-4) !important;
+    height: 36px !important;
+    transition: var(--transition-base) !important;
+
+    &:hover {
+        background-color: var(--primary-dark) !important;
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md) !important;
+    }
+
+    &:disabled {
+        opacity: 0.6 !important;
+        transform: none !important;
+    }
+}
+
+.btn-secondary {
+    background-color: transparent !important;
+    color: var(--text-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md) !important;
+    font-size: var(--text-sm) !important;
+    font-weight: 500 !important;
+    padding: var(--space-2) var(--space-4) !important;
+    height: 36px !important;
+    transition: var(--transition-base) !important;
+
+    &:hover {
+        background-color: var(--surface-secondary) !important;
+        border-color: var(--primary-color) !important;
+        color: var(--primary-color) !important;
+    }
+}
+
+.btn-accent {
+    background-color: var(--accent-color) !important;
+    color: var(--text-primary) !important;
+    border: none !important;
+    border-radius: var(--radius-md) !important;
+    font-size: var(--text-sm) !important;
+    font-weight: 600 !important;
+    padding: var(--space-2) var(--space-4) !important;
+    height: 36px !important;
+    transition: var(--transition-base) !important;
+
+    &:hover {
+        background-color: var(--accent-dark) !important;
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md) !important;
+    }
+}
+
+.btn-small {
+    height: 32px !important;
+    padding: var(--space-1) var(--space-3) !important;
+    font-size: var(--text-xs) !important;
+}
+
+.btn-large {
+    height: 44px !important;
+    padding: var(--space-3) var(--space-6) !important;
+    font-size: var(--text-base) !important;
+}
+
+/* Card Components */
+.card-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%) !important;
+    color: white !important;
+    border: none !important;
+
+    .mat-mdc-card-header {
+        background: transparent !important;
+        border: none !important;
+        color: white !important;
+    }
+
+    .mat-mdc-card-title {
+        color: white !important;
+    }
+
+    .mat-mdc-card-subtitle {
+        color: rgba(255, 255, 255, 0.7) !important;
+    }
+}
+
+.card-surface {
+    background-color: var(--surface-color) !important;
+    border: 1px solid var(--border-light) !important;
+    box-shadow: var(--shadow-sm) !important;
+
+    &:hover {
+        box-shadow: var(--shadow-md) !important;
+        transform: translateY(-1px);
+    }
+}
+
+.card-flat {
+    box-shadow: none !important;
+    border: 1px solid var(--border-color) !important;
+    background-color: var(--surface-color) !important;
+}
+
+/* Form Section Components */
+.form-section {
+    margin-bottom: var(--space-6);
+
+    .section-title {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        margin-bottom: var(--space-4);
+        font-size: var(--text-lg);
+        font-weight: 600;
+        color: var(--text-primary);
+
+        mat-icon {
+            color: var(--primary-color);
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    .section-content {
+        background-color: var(--surface-color);
+        border: 1px solid var(--border-light);
+        border-radius: var(--radius-lg);
+        padding: var(--space-6);
+        box-shadow: var(--shadow-sm);
+    }
+}
+
+/* Status Components */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-xl);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+
+    &.status-success {
+        background-color: rgba(76, 175, 80, 0.1);
+        color: var(--success-color);
+        border: 1px solid rgba(76, 175, 80, 0.2);
+    }
+
+    &.status-warning {
+        background-color: rgba(255, 152, 0, 0.1);
+        color: var(--warn-color);
+        border: 1px solid rgba(255, 152, 0, 0.2);
+    }
+
+    &.status-error {
+        background-color: rgba(244, 67, 54, 0.1);
+        color: var(--error-color);
+        border: 1px solid rgba(244, 67, 54, 0.2);
+    }
+
+    &.status-info {
+        background-color: rgba(33, 150, 243, 0.1);
+        color: var(--info-color);
+        border: 1px solid rgba(33, 150, 243, 0.2);
+    }
+
+    &.status-primary {
+        background-color: rgba(0, 188, 212, 0.1);
+        color: var(--primary-color);
+        border: 1px solid rgba(0, 188, 212, 0.2);
+    }
+}
+
+/* Table Components */
+.table-container {
+    background-color: var(--surface-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-light);
+
+    .mat-mdc-table {
+        background: transparent;
+
+        .mat-mdc-header-row {
+            background-color: var(--surface-secondary);
+            border-bottom: 2px solid var(--border-color);
+
+            .mat-mdc-header-cell {
+                font-weight: 600;
+                color: var(--text-primary);
+                font-size: var(--text-sm);
+                border-bottom: none;
+            }
+        }
+
+        .mat-mdc-row {
+            transition: var(--transition-fast);
+
+            &:hover {
+                background-color: var(--surface-secondary);
+            }
+
+            .mat-mdc-cell {
+                font-size: var(--text-sm);
+                color: var(--text-primary);
+                border-bottom: 1px solid var(--border-light);
+            }
+        }
+    }
+}
+
+/* Loading Components */
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-8);
+
+    .mat-mdc-progress-spinner {
+        --mdc-circular-progress-active-indicator-color: var(--primary-color);
+    }
+}
+
+/* Alert Components */
+.alert {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-4);
+    font-size: var(--text-sm);
+
+    mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        margin-top: 2px;
+    }
+
+    &.alert-success {
+        background-color: rgba(76, 175, 80, 0.1);
+        color: var(--success-color);
+        border: 1px solid rgba(76, 175, 80, 0.2);
+    }
+
+    &.alert-warning {
+        background-color: rgba(255, 152, 0, 0.1);
+        color: var(--warn-color);
+        border: 1px solid rgba(255, 152, 0, 0.2);
+    }
+
+    &.alert-error {
+        background-color: rgba(244, 67, 54, 0.1);
+        color: var(--error-color);
+        border: 1px solid rgba(244, 67, 54, 0.2);
+    }
+
+    &.alert-info {
+        background-color: rgba(33, 150, 243, 0.1);
+        color: var(--info-color);
+        border: 1px solid rgba(33, 150, 243, 0.2);
+    }
+}
+
+/* Input Group Components */
+.input-group {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-end;
+
+    .input-group-item {
+        flex: 1;
+
+        &.input-group-small {
+            flex: 0 0 auto;
+            width: 100px;
+        }
+
+        &.input-group-medium {
+            flex: 0 0 auto;
+            width: 150px;
+        }
+    }
+}
+
+/* Responsive Grid Components */
+.grid {
+    display: grid;
+    gap: var(--space-2);
+
+    &.grid-1 {
+        grid-template-columns: 1fr;
+    }
+
+    &.grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    &.grid-4 {
+        grid-template-columns: 2fr 0.8fr 0.8fr 1fr;
+        align-items: start;
+    }
+
+    @media (max-width: 768px) {
+
+        &.grid-2,
+        &.grid-3,
+        &.grid-4 {
+            grid-template-columns: 1fr;
+            gap: var(--space-2);
+        }
+    }
+}
+
+.flex {
+    display: flex;
+    gap: var(--space-3);
+
+    &.flex-column {
+        flex-direction: column;
+    }
+
+    &.flex-center {
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.flex-between {
+        justify-content: space-between;
+    }
+
+    &.flex-end {
+        justify-content: flex-end;
+    }
+}
+
+/* ===== ENHANCED NUMERIC INPUT COMPONENTS ===== */
+
+/* Numeric Input Field Classes */
+.numeric-input {
+    .mat-mdc-form-field {
+        .mat-mdc-input-element {
+            text-align: right !important;
+            font-family: 'Courier New', monospace !important;
+            font-weight: 500 !important;
+        }
+
+        &.mat-focused .mat-mdc-input-element {
+            font-weight: 600 !important;
+        }
+    }
+}
+
+.amount-field {
+    .mat-mdc-form-field {
+        .mat-mdc-input-element {
+            text-align: right !important;
+            font-family: 'Courier New', monospace !important;
+            font-weight: 600 !important;
+        }
+
+        &.mat-focused .mat-mdc-input-element {
+            color: var(--primary-color) !important;
+        }
+    }
+}
+
+.currency-field {
+    .mat-mdc-form-field {
+        .mat-mdc-input-element {
+            text-align: right !important;
+            font-family: 'Courier New', monospace !important;
+            font-weight: 600 !important;
+            color: var(--primary-color) !important;
+        }
+    }
+}
+
+/* Quantity and Percentage Fields */
+.quantity-field {
+    .mat-mdc-form-field {
+        .mat-mdc-input-element {
+            text-align: right !important;
+            font-family: 'Courier New', monospace !important;
+            font-weight: 500 !important;
+        }
+    }
+}
+
+.percentage-field {
+    .mat-mdc-form-field {
+        .mat-mdc-input-element {
+            text-align: right !important;
+            font-family: 'Courier New', monospace !important;
+            font-weight: 500 !important;
+        }
+
+        &::after {
+            content: '%';
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--text-secondary);
+        }
+    }
+}
+
+/* Utility Classes for Numeric Display */
+.numeric-display {
+    text-align: right !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 500 !important;
+    color: var(--text-primary) !important;
+}
+
+.currency-display {
+    text-align: right !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 600 !important;
+    color: var(--primary-color) !important;
+}
+
+.percentage-display {
+    text-align: right !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 500 !important;
+    color: var(--accent-color) !important;
+}

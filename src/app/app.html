@@ -1,0 +1,35 @@
+<!-- Modern Navigation Header -->
+<header class="app-header">
+  <nav class="navbar">
+    <div class="navbar-content">
+      <div class="navbar-brand">
+        <mat-icon class="brand-icon">computer</mat-icon>
+        <span class="brand-text">MC Computers</span>
+      </div>
+      <ul class="navbar-nav">
+        <li>
+          <a class="nav-link" routerLink="/invoice-generator" routerLinkActive="active">
+            <mat-icon>receipt_long</mat-icon>
+            <span>Generate Invoice</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" routerLink="/invoice-list" routerLinkActive="active">
+            <mat-icon>list_alt</mat-icon>
+            <span>Invoice List</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- Main Content Area -->
+<main class="main-content">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+
+<!-- Global Notification Component -->
+<app-notification></app-notification>

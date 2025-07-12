@@ -1,0 +1,808 @@
+/* Global Styles for MC Computers Invoice Application */
+
+/* Import Shared UI Components */
+@use './shared/ui-components.scss';
+
+/* Custom Color Palette - JIT Resourcing Theme */
+:root {
+    /* Primary Colors - Based on JIT logo */
+    --primary-color: #00bcd4;
+    /* Cyan/Turquoise */
+    --primary-light: #4dd0e1;
+    --primary-dark: #00838f;
+    --accent-color: #cddc39;
+    /* Yellow-Green from logo */
+    --accent-light: #dce775;
+    --accent-dark: #afb42b;
+
+    /* Status Colors */
+    --success-color: #4caf50;
+    --warn-color: #ff9800;
+    --error-color: #f44336;
+    --info-color: #2196f3;
+
+    /* Neutral Colors */
+    --background-color: #fafafa;
+    --surface-color: #ffffff;
+    --surface-secondary: #f8f9fa;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --text-tertiary: #999999;
+    --border-color: #e0e0e0;
+    --border-light: #f0f0f0;
+
+    /* Shadows */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+    /* Border Radius */
+    --radius-xs: 2px;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+
+    /* Spacing Scale */
+    --space-1: 0.25rem;
+    /* 4px */
+    --space-2: 0.5rem;
+    /* 8px */
+    --space-3: 0.75rem;
+    /* 12px */
+    --space-4: 1rem;
+    /* 16px */
+    --space-5: 1.25rem;
+    /* 20px */
+    --space-6: 1.5rem;
+    /* 24px */
+    --space-8: 2rem;
+    /* 32px */
+    --space-10: 2.5rem;
+    /* 40px */
+
+    /* Typography Scale */
+    --text-xs: 0.75rem;
+    /* 12px */
+    --text-sm: 0.875rem;
+    /* 14px */
+    --text-base: 1rem;
+    /* 16px */
+    --text-lg: 1.125rem;
+    /* 18px */
+    --text-xl: 1.25rem;
+    /* 20px */
+    --text-2xl: 1.5rem;
+    /* 24px */
+    --text-3xl: 1.875rem;
+    /* 30px */
+
+    /* Transitions */
+    --transition-fast: all 0.15s ease-in-out;
+    --transition-base: all 0.2s ease-in-out;
+    --transition-slow: all 0.3s ease-in-out;
+}
+
+/* Reset and Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    font-size: var(--text-base);
+    line-height: 1.5;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Material Icons Fix */
+.material-icons {
+    font-family: 'Material Icons' !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    font-size: 24px !important;
+    line-height: 1 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+    display: inline-block !important;
+    white-space: nowrap !important;
+    word-wrap: normal !important;
+    direction: ltr !important;
+    font-feature-settings: 'liga' !important;
+    -webkit-font-feature-settings: 'liga' !important;
+    -webkit-font-smoothing: antialiased !important;
+}
+
+/* Ensure mat-icon displays correctly */
+mat-icon {
+    font-family: 'Material Icons' !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    font-size: inherit !important;
+    line-height: 1 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    word-wrap: normal !important;
+    direction: ltr !important;
+    font-feature-settings: 'liga' !important;
+    -webkit-font-feature-settings: 'liga' !important;
+    -webkit-font-smoothing: antialiased !important;
+    vertical-align: middle !important;
+    overflow: visible !important;
+}
+
+/* Typography System */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-4) 0;
+}
+
+h1 {
+    font-size: var(--text-3xl);
+}
+
+h2 {
+    font-size: var(--text-2xl);
+}
+
+h3 {
+    font-size: var(--text-xl);
+}
+
+h4 {
+    font-size: var(--text-lg);
+}
+
+h5 {
+    font-size: var(--text-base);
+}
+
+h6 {
+    font-size: var(--text-sm);
+}
+
+p {
+    margin: 0 0 var(--space-4) 0;
+    font-size: var(--text-base);
+    line-height: 1.6;
+}
+
+.text-xs {
+    font-size: var(--text-xs);
+}
+
+.text-sm {
+    font-size: var(--text-sm);
+}
+
+.text-base {
+    font-size: var(--text-base);
+}
+
+.text-lg {
+    font-size: var(--text-lg);
+}
+
+.text-xl {
+    font-size: var(--text-xl);
+}
+
+.text-primary {
+    color: var(--text-primary);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.text-tertiary {
+    color: var(--text-tertiary);
+}
+
+/* Material Design Form Field Customizations */
+.mat-mdc-form-field {
+    width: 100% !important;
+    margin-bottom: var(--space-3) !important;
+    font-size: var(--text-sm) !important;
+
+    .mat-mdc-text-field-wrapper {
+        border-radius: var(--radius-sm) !important;
+        height: 40px !important;
+    }
+
+    .mdc-text-field {
+        height: 40px !important;
+        font-size: var(--text-sm) !important;
+    }
+
+    .mat-mdc-form-field-input-control input {
+        font-size: var(--text-sm) !important;
+        height: 24px !important;
+        padding: var(--space-2) var(--space-3) !important;
+    }
+
+    .mat-mdc-floating-label {
+        font-size: var(--text-sm) !important;
+        top: 18px !important;
+    }
+
+    .mat-mdc-form-field-subscript-wrapper {
+        font-size: var(--text-xs) !important;
+        margin-top: var(--space-1) !important;
+    }
+
+    &.mat-form-field-appearance-outline {
+        .mat-mdc-text-field-wrapper {
+            .mat-mdc-notched-outline {
+
+                .mat-mdc-notched-outline-start,
+                .mat-mdc-notched-outline-middle,
+                .mat-mdc-notched-outline-end {
+                    border-color: var(--border-color) !important;
+                    border-width: 1px !important;
+                }
+            }
+
+            &:hover .mat-mdc-notched-outline {
+
+                .mat-mdc-notched-outline-start,
+                .mat-mdc-notched-outline-middle,
+                .mat-mdc-notched-outline-end {
+                    border-color: var(--primary-light) !important;
+                }
+            }
+
+            &.mdc-text-field--focused .mat-mdc-notched-outline {
+
+                .mat-mdc-notched-outline-start,
+                .mat-mdc-notched-outline-middle,
+                .mat-mdc-notched-outline-end {
+                    border-color: var(--primary-color) !important;
+                    border-width: 1px !important;
+                }
+            }
+        }
+    }
+}
+
+/* Compact Form Field Variants */
+.mat-mdc-form-field.compact {
+    margin-bottom: var(--space-2) !important;
+
+    .mat-mdc-text-field-wrapper {
+        height: 36px !important;
+    }
+
+    .mdc-text-field {
+        height: 36px !important;
+    }
+
+    .mat-mdc-form-field-input-control input {
+        height: 20px !important;
+        padding: var(--space-1) var(--space-2) !important;
+    }
+
+    .mat-mdc-floating-label {
+        top: 16px !important;
+    }
+}
+
+.mat-mdc-form-field.extra-compact {
+    margin-bottom: var(--space-1) !important;
+
+    .mat-mdc-text-field-wrapper {
+        height: 32px !important;
+    }
+
+    .mdc-text-field {
+        height: 32px !important;
+    }
+
+    .mat-mdc-form-field-input-control input {
+        height: 18px !important;
+        padding: var(--space-1) !important;
+        font-size: var(--text-xs) !important;
+    }
+
+    .mat-mdc-floating-label {
+        font-size: var(--text-xs) !important;
+        top: 14px !important;
+    }
+}
+
+/* Card Customizations */
+.mat-mdc-card {
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-sm) !important;
+    margin-bottom: var(--space-6) !important;
+    transition: var(--transition-base) !important;
+    border: 1px solid var(--border-light) !important;
+    background-color: var(--surface-color) !important;
+}
+
+.mat-mdc-card:hover {
+    box-shadow: var(--shadow-md) !important;
+    transform: translateY(-1px);
+}
+
+.mat-mdc-card-header {
+    padding: var(--space-4) var(--space-6) !important;
+    border-bottom: 1px solid var(--border-light) !important;
+    background-color: var(--surface-secondary) !important;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important;
+}
+
+.mat-mdc-card-title {
+    font-size: var(--text-lg) !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+    margin: 0 !important;
+}
+
+.mat-mdc-card-subtitle {
+    font-size: var(--text-sm) !important;
+    color: var(--text-secondary) !important;
+    margin: var(--space-1) 0 0 0 !important;
+}
+
+.mat-mdc-card-content {
+    padding: var(--space-6) !important;
+}
+
+/* Button Customizations */
+.mat-mdc-raised-button {
+    border-radius: var(--radius-md) !important;
+    font-weight: 500 !important;
+    font-size: var(--text-sm) !important;
+    text-transform: none !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: var(--transition-base) !important;
+    height: 36px !important;
+    padding: 0 var(--space-4) !important;
+    min-width: auto !important;
+
+    &.mat-primary {
+        background-color: var(--primary-color) !important;
+        color: white !important;
+
+        &:hover {
+            background-color: var(--primary-dark) !important;
+            box-shadow: var(--shadow-md) !important;
+        }
+    }
+
+    &.mat-accent {
+        background-color: var(--accent-color) !important;
+        color: var(--text-primary) !important;
+
+        &:hover {
+            background-color: var(--accent-dark) !important;
+        }
+    }
+
+    &.mat-warn {
+        background-color: var(--error-color) !important;
+        color: white !important;
+    }
+}
+
+.mat-mdc-button,
+.mat-mdc-outlined-button {
+    border-radius: var(--radius-md) !important;
+    font-weight: 500 !important;
+    font-size: var(--text-sm) !important;
+    text-transform: none !important;
+    transition: var(--transition-base) !important;
+    height: 36px !important;
+    padding: 0 var(--space-4) !important;
+    min-width: auto !important;
+}
+
+.mat-mdc-outlined-button {
+    border: 1px solid var(--border-color) !important;
+
+    &:hover {
+        background-color: var(--surface-secondary) !important;
+        border-color: var(--primary-color) !important;
+    }
+}
+
+.mat-mdc-icon-button {
+    border-radius: var(--radius-md) !important;
+    transition: var(--transition-base) !important;
+    width: 36px !important;
+    height: 36px !important;
+
+    &:hover {
+        background-color: var(--surface-secondary) !important;
+    }
+}
+
+.mat-mdc-icon-button {
+    border-radius: 50% !important;
+    transition: var(--transition) !important;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.04) !important;
+    }
+}
+
+/* Select Customizations */
+.mat-mdc-select {
+    border-radius: var(--radius-sm) !important;
+    min-height: 40px !important;
+    font-size: var(--text-sm) !important;
+
+    .mat-mdc-select-trigger {
+        border-radius: var(--radius-sm) !important;
+        padding: var(--space-2) var(--space-3) !important;
+        height: 40px !important;
+        min-height: 40px !important;
+    }
+
+    .mat-mdc-select-value {
+        font-size: var(--text-sm) !important;
+        color: var(--text-primary) !important;
+    }
+
+    .mat-mdc-select-arrow {
+        color: var(--primary-color) !important;
+    }
+}
+
+.mat-mdc-select-panel {
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-lg) !important;
+    border: 1px solid var(--border-light) !important;
+
+    .mat-mdc-option {
+        font-size: var(--text-sm) !important;
+        padding: 0 var(--space-4) !important;
+        height: 40px !important;
+        line-height: 40px !important;
+
+        &:hover {
+            background-color: rgba(0, 188, 212, 0.08) !important;
+        }
+
+        &.mat-mdc-option-active {
+            background-color: rgba(0, 188, 212, 0.12) !important;
+            color: var(--primary-dark) !important;
+        }
+    }
+}
+
+/* Date Picker Customizations */
+.mat-datepicker-popup {
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-lg) !important;
+
+    .mat-calendar {
+        border-radius: var(--radius-lg) !important;
+        font-size: var(--text-sm) !important;
+    }
+
+    .mat-calendar-header {
+        background-color: var(--primary-color) !important;
+        color: white !important;
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important;
+    }
+
+    .mat-calendar-body-selected {
+        background-color: var(--primary-color) !important;
+        color: white !important;
+    }
+
+    .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+        border-color: var(--primary-color) !important;
+    }
+}
+
+/* Responsive Grid System */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-4);
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: var(--space-6);
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding: var(--space-8);
+    }
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.col {
+    flex: 1;
+    min-width: 0;
+}
+
+.col-12 {
+    flex: 0 0 100%;
+}
+
+.col-6 {
+    flex: 0 0 50%;
+}
+
+.col-4 {
+    flex: 0 0 33.333333%;
+}
+
+.col-3 {
+    flex: 0 0 25%;
+}
+
+.col-2 {
+    flex: 0 0 16.666667%;
+}
+
+@media (max-width: 767px) {
+
+    .col-6,
+    .col-4,
+    .col-3,
+    .col-2 {
+        flex: 0 0 100%;
+    }
+}
+
+/* Utility Classes */
+.mb-1 {
+    margin-bottom: var(--space-1) !important;
+}
+
+.mb-2 {
+    margin-bottom: var(--space-2) !important;
+}
+
+.mb-3 {
+    margin-bottom: var(--space-3) !important;
+}
+
+.mb-4 {
+    margin-bottom: var(--space-4) !important;
+}
+
+.mb-5 {
+    margin-bottom: var(--space-5) !important;
+}
+
+.mb-6 {
+    margin-bottom: var(--space-6) !important;
+}
+
+.mt-1 {
+    margin-top: var(--space-1) !important;
+}
+
+.mt-2 {
+    margin-top: var(--space-2) !important;
+}
+
+.mt-3 {
+    margin-top: var(--space-3) !important;
+}
+
+.mt-4 {
+    margin-top: var(--space-4) !important;
+}
+
+.p-1 {
+    padding: var(--space-1) !important;
+}
+
+.p-2 {
+    padding: var(--space-2) !important;
+}
+
+.p-3 {
+    padding: var(--space-3) !important;
+}
+
+.p-4 {
+    padding: var(--space-4) !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+.justify-content-between {
+    justify-content: space-between !important;
+}
+
+.justify-content-center {
+    justify-content: center !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.rounded {
+    border-radius: var(--radius-md) !important;
+}
+
+.rounded-lg {
+    border-radius: var(--radius-lg) !important;
+}
+
+.shadow-sm {
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.shadow-md {
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* Status Badge Components */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-xl);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-success {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--success-color);
+    border: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.badge-warning {
+    background-color: rgba(255, 152, 0, 0.1);
+    color: var(--warn-color);
+    border: 1px solid rgba(255, 152, 0, 0.2);
+}
+
+.badge-error {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: var(--error-color);
+    border: 1px solid rgba(244, 67, 54, 0.2);
+}
+
+.badge-info {
+    background-color: rgba(33, 150, 243, 0.1);
+    color: var(--info-color);
+    border: 1px solid rgba(33, 150, 243, 0.2);
+}
+
+.badge-primary {
+    background-color: rgba(0, 188, 212, 0.1);
+    color: var(--primary-color);
+    border: 1px solid rgba(0, 188, 212, 0.2);
+}
+
+/* ===== GLOBAL NUMERIC INPUT STYLES ===== */
+
+/* Right-align all number inputs globally */
+input[type="number"] {
+    text-align: right !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 500 !important;
+}
+
+/* Right-align inputs with specific numeric classes */
+.numeric-input input,
+.amount-field input,
+.quantity-field input,
+.price-field input,
+.discount-field input,
+.paid-field input {
+    text-align: right !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 500 !important;
+}
+
+/* Material Design form field adjustments for numeric inputs */
+.mat-mdc-form-field.numeric-input .mat-mdc-input-element,
+.mat-mdc-form-field.amount-field .mat-mdc-input-element {
+    text-align: right !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 500 !important;
+}
+
+/* Specific targeting for form fields containing numeric inputs */
+.mat-mdc-form-field:has(input[type="number"]) .mat-mdc-input-element {
+    text-align: right !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 500 !important;
+}
+
+/* Currency and monetary value display */
+.currency-input input,
+.monetary-field input {
+    text-align: right !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 600 !important;
+}
+
+/* Utility classes for numeric content */
+.numeric-content {
+    text-align: right !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 500 !important;
+}
+
+.monetary-content {
+    text-align: right !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 600 !important;
+}
+
+/* Right-align placeholder text for number inputs */
+input[type="number"]::placeholder {
+    text-align: right !important;
+    font-family: 'Courier New', monospace !important;
+    opacity: 0.6 !important;
+}
+
+/* Ensure Material Design form field labels are not affected */
+.mat-mdc-form-field .mat-mdc-floating-label {
+    text-align: left !important;
+    font-family: inherit !important;
+}
+
+/* Handle Angular Material specific number inputs */
+mat-form-field input[type="number"] {
+    text-align: right !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+/* Specific class for line totals and calculated values */
+.line-total,
+.calculated-total,
+.display-amount {
+    text-align: right !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 600 !important;
+}

@@ -1,0 +1,204 @@
+<div class="invoice-generator">
+    <mat-card class="card-primary">
+        <mat-card-header>
+            <mat-card-title>
+                <mat-icon>receipt</mat-icon>
+                Generate Customer Invoice
+            </mat-card-title>
+            <mat-card-subtitle>MC Computers - Computer Parts & Accessories</mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+
+    <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()" class="invoice-form">
+        <!-- Customer and Date Information -->
+        <div class="form-section">
+            <div class="section-title">
+                <mat-icon>person</mat-icon>
+                Customer Information
+                <div class="spacer"></div>
+            </div>
+            <div class="section-content">
+                <div class="grid grid-2">
+                    <div class="form-field-compact">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Customer</mat-label>
+                            <mat-select formControlName="customerId" required>
+                                <mat-option *ngFor="let customer of customers()" [value]="customer.id">
+                                    {{customer.name}} - {{customer.email}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="invoiceForm.get('customerId')?.hasError('required')">
+                                Customer is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field-compact">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Transaction Date</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="transactionDate" required>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="invoiceForm.get('transactionDate')?.hasError('required')">
+                                Transaction date is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Section -->
+        <div class="form-section">
+            <div class="section-title">
+                <mat-icon>inventory_2</mat-icon>
+                Products
+                <div class="spacer"></div>
+                <button mat-raised-button color="primary" type="button" (click)="addProduct()"
+                    [disabled]="loadingService.isLoading()" class="btn-primary">
+                    <mat-icon>add</mat-icon>
+                    Add Product
+                </button>
+            </div>
+            <div class="section-content">
+                <div formArrayName="items">
+                    <div *ngFor="let item of itemsFormArray.controls; let i = index" [formGroupName]="i"
+                        class="product-item mb-4">
+                        <div class="product-card card-surface">
+                            <div class="grid grid-4">
+                                <div class="form-field-extra-compact">
+                                    <mat-form-field appearance="outline" class="full-width">
+                                        <mat-label>Product</mat-label>
+                                        <mat-select formControlName="productId"
+                                            (selectionChange)="onProductChange(i, $event.value)">
+                                            <mat-option *ngFor="let product of products()" [value]="product.id">
+                                                {{product.name}} - ${{product.price}} (Stock: {{product.stockQuantity}})
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="getItemFormGroup(i).get('productId')?.hasError('required')">
+                                            Product is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="form-field-extra-compact">
+                                    <mat-form-field appearance="outline" class="full-width">
+                                        <mat-label>Quantity</mat-label>
+                                        <input matInput type="number" formControlName="quantity" min="1"
+                                            (input)="calculateLineTotal(i)">
+                                        <mat-error *ngIf="getItemFormGroup(i).get('quantity')?.hasError('required')">
+                                            Quantity is required
+                                        </mat-error>
+                                        <mat-error *ngIf="getItemFormGroup(i).get('quantity')?.hasError('min')">
+                                            Minimum quantity is 1
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="form-field-extra-compact">
+                                    <mat-form-field appearance="outline" class="full-width">
+                                        <mat-label>Unit Price</mat-label>
+                                        <input matInput type="number" formControlName="unitPrice" min="0.01" step="0.01"
+                                            (input)="calculateLineTotal(i)">
+                                        <mat-error *ngIf="getItemFormGroup(i).get('unitPrice')?.hasError('required')">
+                                            Unit price is required
+                                        </mat-error>
+                                        <mat-error *ngIf="getItemFormGroup(i).get('unitPrice')?.hasError('min')">
+                                            Minimum price is $0.01 </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="flex flex-center">
+                                    <div class="line-total text-lg font-weight-bold">
+                                        ${{getLineTotal(i)}}
+                                    </div>
+
+                                    <button mat-icon-button color="warn" type="button" (click)="removeProduct(i)"
+                                        [disabled]="itemsFormArray.length === 1" class="btn-secondary">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Totals Section -->
+        <div class="form-section">
+            <div class="section-title">
+                <mat-icon>calculate</mat-icon>
+                Invoice Totals
+                <div class="spacer"></div>
+            </div>
+            <div class="section-content">
+                <div class="grid grid-2">
+                    <div class="form-field-compact">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Discount (%)</mat-label>
+                            <input matInput type="number" formControlName="discountPercentage" min="0" max="100"
+                                step="0.01" (input)="calculateTotals()">
+                            <mat-error *ngIf="invoiceForm.get('discountPercentage')?.hasError('min')">
+                                Minimum discount is 0%
+                            </mat-error>
+                            <mat-error *ngIf="invoiceForm.get('discountPercentage')?.hasError('max')">
+                                Maximum discount is 100%
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-field-compact">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Paid Amount</mat-label>
+                            <input matInput type="number" formControlName="paidAmount" min="0" step="0.01"
+                                (input)="calculateTotals()">
+                            <mat-error *ngIf="invoiceForm.get('paidAmount')?.hasError('min')">
+                                Paid amount cannot be negative
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="totals-display card-surface p-4 mt-4">
+                    <div class="total-row flex flex-between">
+                        <span class="text-sm">Subtotal:</span>
+                        <span class="amount text-sm font-weight-bold">${{subtotal()}}</span>
+                    </div>
+                    <div class="total-row flex flex-between">
+                        <span class="text-sm">Discount ({{invoiceForm.get('discountPercentage')?.value || 0}}%):</span>
+                        <span class="amount text-sm font-weight-bold">-${{discountAmount()}}</span>
+                    </div>
+                    <div class="total-row total-final flex flex-between">
+                        <span class="text-lg font-weight-bold">Total Amount:</span>
+                        <span class="amount text-lg font-weight-bold text-primary">${{totalAmount()}}</span>
+                    </div>
+                    <div class="total-row flex flex-between">
+                        <span class="text-sm">Paid Amount:</span>
+                        <span class="amount text-sm font-weight-bold">${{invoiceForm.get('paidAmount')?.value ||
+                            0}}</span>
+                    </div>
+                    <div class="total-row balance-row flex flex-between">
+                        <span class="text-sm">Balance Amount:</span>
+                        <span class="amount text-sm font-weight-bold"
+                            [class.negative]="parseFloat(balanceAmount()) < 0">${{balanceAmount()}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions flex flex-end">
+            <button mat-raised-button type="button" (click)="resetForm()" [disabled]="loadingService.isLoading()"
+                class="btn-secondary">
+                <mat-icon>refresh</mat-icon>
+                Reset
+            </button>
+            <button mat-raised-button type="submit" [disabled]="invoiceForm.invalid || loadingService.isLoading()"
+                class="btn-primary">
+                <mat-icon>save</mat-icon>
+                Generate Invoice
+                <mat-spinner *ngIf="loadingService.isLoading()" diameter="20"></mat-spinner>
+            </button>
+        </div>
+    </form>
+</div>
