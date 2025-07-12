@@ -20,17 +20,14 @@
             <div class="section-content">
                 <div class="grid grid-2">
                     <div class="form-field-compact">
-                        <mat-form-field appearance="outline" class="full-width">
-                            <mat-label>Customer</mat-label>
-                            <mat-select formControlName="customerId" required>
-                                <mat-option *ngFor="let customer of customers()" [value]="customer.id">
-                                    {{customer.name}} - {{customer.email}}
-                                </mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="invoiceForm.get('customerId')?.hasError('required')">
+                        <app-customer-autocomplete [customers]="customers" [isLoading]="loadingService.isLoading()"
+                            [hasError]="!!(invoiceForm.get('customerId')?.invalid && invoiceForm.get('customerId')?.touched)"
+                            label="Customer" placeholder="Search for a customer..." formControlName="customerId"
+                            (customerSelected)="onCustomerChange($event)">
+                            <div slot="error" *ngIf="invoiceForm.get('customerId')?.hasError('required')">
                                 Customer is required
-                            </mat-error>
-                        </mat-form-field>
+                            </div>
+                        </app-customer-autocomplete>
                     </div>
                     <div class="form-field-compact">
                         <mat-form-field appearance="outline" class="full-width">
@@ -66,18 +63,16 @@
                         <div class="product-card card-surface">
                             <div class="grid grid-4">
                                 <div class="form-field-extra-compact">
-                                    <mat-form-field appearance="outline" class="full-width">
-                                        <mat-label>Product</mat-label>
-                                        <mat-select formControlName="productId"
-                                            (selectionChange)="onProductChange(i, $event.value)">
-                                            <mat-option *ngFor="let product of products()" [value]="product.id">
-                                                {{product.name}} - ${{product.price}} (Stock: {{product.stockQuantity}})
-                                            </mat-option>
-                                        </mat-select>
-                                        <mat-error *ngIf="getItemFormGroup(i).get('productId')?.hasError('required')">
+                                    <app-product-autocomplete [products]="products"
+                                        [isLoading]="loadingService.isLoading()"
+                                        [hasError]="!!(getItemFormGroup(i).get('productId')?.invalid && getItemFormGroup(i).get('productId')?.touched)"
+                                        label="Product" placeholder="Search for a product..."
+                                        formControlName="productId" (productSelected)="onProductChange(i, $event.id)">
+                                        <div slot="error"
+                                            *ngIf="getItemFormGroup(i).get('productId')?.hasError('required')">
                                             Product is required
-                                        </mat-error>
-                                    </mat-form-field>
+                                        </div>
+                                    </app-product-autocomplete>
                                 </div>
 
                                 <div class="form-field-extra-compact">

@@ -18,6 +18,8 @@ import { LoadingService } from '../../services/loading.service';
 import { NotificationService } from '../../services/notification.service';
 import { PdfService } from '../../services/pdf.service';
 import { Customer, Product, CreateInvoice, InvoiceItem } from '../../models/invoice.model';
+import { CustomerAutocompleteComponent } from '../shared/customer-autocomplete/customer-autocomplete.component';
+import { ProductAutocompleteComponent } from '../shared/product-autocomplete/product-autocomplete.component';
 
 @Component({
     selector: 'app-invoice-generator',
@@ -35,7 +37,9 @@ import { Customer, Product, CreateInvoice, InvoiceItem } from '../../models/invo
         MatNativeDateModule,
         MatTableModule,
         MatProgressSpinnerModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        CustomerAutocompleteComponent,
+        ProductAutocompleteComponent
     ],
     templateUrl: './invoice-generator.component.html',
     styleUrl: './invoice-generator.component.scss'
@@ -135,6 +139,11 @@ export class InvoiceGeneratorComponent implements OnInit {
             });
             this.calculateLineTotal(index);
         }
+    }
+
+    onCustomerChange(customer: Customer): void {
+        // Handle customer selection if needed
+        console.log('Customer selected:', customer);
     }
 
     calculateLineTotal(index: number): void {
