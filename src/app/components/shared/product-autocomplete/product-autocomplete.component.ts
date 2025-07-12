@@ -34,33 +34,23 @@ import { startWith, map } from 'rxjs/operators';
         #auto="matAutocomplete" 
         [displayWith]="displayProduct"
         (optionSelected)="onProductSelected($event)"
-        class="product-autocomplete-panel"
+        panelClass="product-autocomplete-panel"
       >
-        <div class="autocomplete-options-container">
-          <mat-option 
-            *ngFor="let product of filteredProducts | async; trackBy: trackByProduct" 
-            [value]="product"
-            class="product-option"
-          >
-            <div class="product-content">
-              <div class="product-name">{{ product.id }} - {{ product.name }}</div>
-              <div class="product-details">
-                <span class="product-price">\${{ product.price.toFixed(2) }}</span>
-                <span class="product-stock" [class.low-stock]="product.stockQuantity <= 5">
-                  Stock: {{ product.stockQuantity }}
-                </span>
-              </div>
-            </div>
-          </mat-option>
-          
-          <mat-option 
-            *ngIf="noProductsFound" 
-            disabled
-            class="no-options"
-          >
-            No products found
-          </mat-option>
-        </div>
+        <mat-option 
+          *ngFor="let product of filteredProducts | async; trackBy: trackByProduct" 
+          [value]="product"
+          class="product-option"
+        >
+          <span class="product-display">{{ product.id }} - {{ product.name }}</span>
+        </mat-option>
+        
+        <mat-option 
+          *ngIf="noProductsFound" 
+          disabled
+          class="no-options"
+        >
+          No products found
+        </mat-option>
       </mat-autocomplete>
       
       <mat-error *ngIf="hasError">

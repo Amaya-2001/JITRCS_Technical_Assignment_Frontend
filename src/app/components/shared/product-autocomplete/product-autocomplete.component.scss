@@ -1,165 +1,134 @@
-.product-autocomplete-panel {
-    max-height: 300px;
-
-    .autocomplete-options-container {
-        max-height: 280px;
-        overflow-y: auto;
-
-        /* Custom scrollbar styles */
-        &::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        &::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 3px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 3px;
-
-            &:hover {
-                background: #a8a8a8;
-            }
-        }
-    }
+/* Target the Material Design autocomplete panel directly */
+::ng-deep .mat-autocomplete-panel.product-autocomplete-panel {
+    max-height: 300px !important;
+    background-color: #ffffff !important;
+    border-radius: 4px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    overflow-y: auto !important;
 }
 
-.product-option {
-    .product-content {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-
-        .product-name {
-            font-weight: 500;
-            color: rgba(0, 0, 0, 0.87);
-            font-size: 14px;
-            line-height: 1.4;
-        }
-
-        .product-details {
-            display: flex;
-            gap: 12px;
-            font-size: 12px;
-            line-height: 1.3;
-
-            .product-price {
-                color: #2e7d32;
-                font-weight: 600;
-            }
-
-            .product-stock {
-                color: rgba(0, 0, 0, 0.54);
-
-                &.low-stock {
-                    color: #d32f2f;
-                    font-weight: 600;
-                }
-            }
-        }
-    }
-
-    &:hover {
-        .product-content {
-            .product-name {
-                color: #1976d2;
-            }
-        }
-    }
-
-    &.mat-selected {
-        background-color: rgba(25, 118, 210, 0.08);
-
-        .product-content {
-            .product-name {
-                color: #1976d2;
-                font-weight: 600;
-            }
-        }
-    }
-
-    min-height: 56px;
-    padding: 8px 16px;
-
-    &:focus {
-        outline: 2px solid #1976d2;
-        outline-offset: -2px;
-    }
+/* Target each option directly with higher specificity */
+::ng-deep .mat-autocomplete-panel.product-autocomplete-panel .mat-option {
+    background-color: #ffffff !important;
+    color: rgba(0, 0, 0, 0.87) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    min-height: 48px !important;
+    padding: 12px 16px !important;
+    line-height: 1.5 !important;
+    transition: all 0.2s ease !important;
+    position: relative !important;
 }
 
-.no-options {
-    padding: 16px;
-    text-align: center;
-    color: rgba(0, 0, 0, 0.54);
-    font-style: italic;
-    cursor: default;
+::ng-deep .mat-autocomplete-panel.product-autocomplete-panel .mat-option:hover {
+    background-color: rgba(25, 118, 210, 0.08) !important;
+    color: #1976d2 !important;
 }
 
+::ng-deep .mat-autocomplete-panel.product-autocomplete-panel .mat-option.mat-selected {
+    background-color: rgba(25, 118, 210, 0.15) !important;
+    color: #1976d2 !important;
+}
+
+::ng-deep .mat-autocomplete-panel.product-autocomplete-panel .mat-option.mat-active {
+    background-color: rgba(25, 118, 210, 0.12) !important;
+    color: #1976d2 !important;
+}
+
+::ng-deep .mat-autocomplete-panel.product-autocomplete-panel .mat-option:focus {
+    background-color: rgba(25, 118, 210, 0.1) !important;
+    outline: 2px solid #1976d2 !important;
+    outline-offset: -2px !important;
+}
+
+/* Style for the product display text */
+::ng-deep .mat-autocomplete-panel.product-autocomplete-panel .product-display {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: inherit !important;
+}
+
+/* No options message */
+::ng-deep .mat-autocomplete-panel.product-autocomplete-panel .mat-option.no-options {
+    background-color: #f5f5f5 !important;
+    text-align: center !important;
+    color: rgba(0, 0, 0, 0.54) !important;
+    font-style: italic !important;
+    cursor: default !important;
+}
+
+/* Custom scrollbar */
+::ng-deep .mat-autocomplete-panel.product-autocomplete-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+::ng-deep .mat-autocomplete-panel.product-autocomplete-panel::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+::ng-deep .mat-autocomplete-panel.product-autocomplete-panel::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+::ng-deep .mat-autocomplete-panel.product-autocomplete-panel::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Component-level styles */
 .full-width {
     width: 100%;
 }
 
 /* Dark theme support */
 @media (prefers-color-scheme: dark) {
-    .product-autocomplete-panel {
-        .autocomplete-options-container {
-            &::-webkit-scrollbar-track {
-                background: #2d2d2d;
-            }
-
-            &::-webkit-scrollbar-thumb {
-                background: #555;
-
-                &:hover {
-                    background: #777;
-                }
-            }
-        }
+    ::ng-deep .mat-autocomplete-panel.product-autocomplete-panel {
+        background-color: #424242 !important;
+        border-color: rgba(255, 255, 255, 0.12) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
     }
 
-    .product-option {
-        .product-content {
-            .product-name {
-                color: rgba(255, 255, 255, 0.87);
-            }
-
-            .product-details {
-                .product-price {
-                    color: #4caf50;
-                }
-
-                .product-stock {
-                    color: rgba(255, 255, 255, 0.54);
-
-                    &.low-stock {
-                        color: #f44336;
-                    }
-                }
-            }
-        }
-
-        &:hover {
-            .product-content {
-                .product-name {
-                    color: #90caf9;
-                }
-            }
-        }
-
-        &.mat-selected {
-            background-color: rgba(144, 202, 249, 0.08);
-
-            .product-content {
-                .product-name {
-                    color: #90caf9;
-                }
-            }
-        }
+    ::ng-deep .mat-autocomplete-panel.product-autocomplete-panel .mat-option {
+        background-color: #424242 !important;
+        color: rgba(255, 255, 255, 0.87) !important;
+        border-bottom-color: rgba(255, 255, 255, 0.08) !important;
     }
 
-    .no-options {
-        color: rgba(255, 255, 255, 0.54);
+    ::ng-deep .mat-autocomplete-panel.product-autocomplete-panel .mat-option:hover {
+        background-color: rgba(144, 202, 249, 0.12) !important;
+        color: #90caf9 !important;
+    }
+
+    ::ng-deep .mat-autocomplete-panel.product-autocomplete-panel .mat-option.mat-selected {
+        background-color: rgba(144, 202, 249, 0.2) !important;
+        color: #90caf9 !important;
+    }
+
+    ::ng-deep .mat-autocomplete-panel.product-autocomplete-panel .mat-option.mat-active {
+        background-color: rgba(144, 202, 249, 0.16) !important;
+        color: #90caf9 !important;
+    }
+
+    ::ng-deep .mat-autocomplete-panel.product-autocomplete-panel .mat-option:focus {
+        background-color: rgba(144, 202, 249, 0.14) !important;
+        outline-color: #90caf9 !important;
+    }
+
+    ::ng-deep .mat-autocomplete-panel.product-autocomplete-panel .mat-option.no-options {
+        background-color: #303030 !important;
+        color: rgba(255, 255, 255, 0.7) !important;
+    }
+
+    ::ng-deep .mat-autocomplete-panel.product-autocomplete-panel::-webkit-scrollbar-track {
+        background: #303030;
+    }
+
+    ::ng-deep .mat-autocomplete-panel.product-autocomplete-panel::-webkit-scrollbar-thumb {
+        background: #666666;
+    }
+
+    ::ng-deep .mat-autocomplete-panel.product-autocomplete-panel::-webkit-scrollbar-thumb:hover {
+        background: #888888;
     }
 }

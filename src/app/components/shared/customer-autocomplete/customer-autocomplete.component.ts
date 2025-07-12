@@ -34,28 +34,26 @@ import { startWith, map } from 'rxjs/operators';
         #auto="matAutocomplete" 
         [displayWith]="displayCustomer"
         (optionSelected)="onCustomerSelected($event)"
-        class="customer-autocomplete-panel"
+        panelClass="customer-autocomplete-panel"
       >
-        <div class="autocomplete-options-container">
-          <mat-option 
-            *ngFor="let customer of filteredCustomers | async; trackBy: trackByCustomer" 
-            [value]="customer"
-            class="customer-option"
-          >
-            <div class="customer-content">
-              <div class="customer-name">{{ customer.id }} - {{ customer.name }}</div>
-              <div class="customer-email">{{ customer.email }}</div>
-            </div>
-          </mat-option>
-          
-          <mat-option 
-            *ngIf="noCustomersFound" 
-            disabled
-            class="no-options"
-          >
-            No customers found
-          </mat-option>
-        </div>
+        <mat-option 
+          *ngFor="let customer of filteredCustomers | async; trackBy: trackByCustomer" 
+          [value]="customer"
+          class="customer-option"
+        >
+          <div class="customer-content">
+            <div class="customer-name">{{ customer.id }} - {{ customer.name }}</div>
+            <div class="customer-email">{{ customer.email }}</div>
+          </div>
+        </mat-option>
+        
+        <mat-option 
+          *ngIf="noCustomersFound" 
+          disabled
+          class="no-options"
+        >
+          No customers found
+        </mat-option>
       </mat-autocomplete>
       
       <mat-error *ngIf="hasError">
