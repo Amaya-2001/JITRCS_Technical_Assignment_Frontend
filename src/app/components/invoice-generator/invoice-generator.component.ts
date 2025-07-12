@@ -1,6 +1,7 @@
-import { Component, OnInit, inject, signal, computed } from '@angular/core';
+import { Component, OnInit, inject, signal, computed, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Subject, takeUntil, debounceTime } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -44,45 +45,52 @@ import { ProductAutocompleteComponent } from '../shared/product-autocomplete/pro
     templateUrl: './invoice-generator.component.html',
     styleUrl: './invoice-generator.component.scss'
 })
-export class InvoiceGeneratorComponent implements OnInit {
+export class InvoiceGeneratorComponent implements OnInit, OnDestroy {
     private apiService = inject(ApiService);
     private fb = inject(FormBuilder);
     private snackBar = inject(MatSnackBar);
     public loadingService = inject(LoadingService);
     private notificationService = inject(NotificationService);
     private pdfService = inject(PdfService);
+    private destroy$ = new Subject<void>();
 
     customers = signal<Customer[]>([]);
     products = signal<Product[]>([]);
 
+    // Reactive signals for totals
+    formValues = signal<any>({});
+
     invoiceForm: FormGroup;
 
-    // Computed values for totals
+    // Computed values for totals - now reactive to form changes
     subtotal = computed(() => {
-        const items = this.invoiceForm?.get('items')?.value || [];
+        const formData = this.formValues();
+        const items = formData.items || [];
         return items.reduce((sum: number, item: any) => {
             const quantity = parseFloat(item.quantity) || 0;
             const unitPrice = parseFloat(item.unitPrice) || 0;
             return sum + (quantity * unitPrice);
-        }, 0).toFixed(2);
+        }, 0);
     });
 
     discountAmount = computed(() => {
-        const subtotalValue = parseFloat(this.subtotal());
-        const discountPercent = parseFloat(this.invoiceForm?.get('discountPercentage')?.value) || 0;
-        return (subtotalValue * (discountPercent / 100)).toFixed(2);
+        const subtotalValue = this.subtotal();
+        const formData = this.formValues();
+        const discountPercent = parseFloat(formData.discountPercentage) || 0;
+        return (subtotalValue * (discountPercent / 100));
     });
 
     totalAmount = computed(() => {
-        const subtotalValue = parseFloat(this.subtotal());
-        const discountValue = parseFloat(this.discountAmount());
-        return (subtotalValue - discountValue).toFixed(2);
+        const subtotalValue = this.subtotal();
+        const discountValue = this.discountAmount();
+        return (subtotalValue - discountValue);
     });
 
     balanceAmount = computed(() => {
-        const totalValue = parseFloat(this.totalAmount());
-        const paidValue = parseFloat(this.invoiceForm?.get('paidAmount')?.value) || 0;
-        return (totalValue - paidValue).toFixed(2);
+        const totalValue = this.totalAmount();
+        const formData = this.formValues();
+        const paidValue = parseFloat(formData.paidAmount) || 0;
+        return (totalValue - paidValue);
     });
 
     // Make parseFloat available in template
@@ -101,6 +109,27 @@ export class InvoiceGeneratorComponent implements OnInit {
     ngOnInit(): void {
         this.loadCustomers();
         this.loadProducts();
+        this.setupFormSubscriptions();
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
+
+    private setupFormSubscriptions(): void {
+        // Subscribe to form value changes and update the signal
+        this.invoiceForm.valueChanges
+            .pipe(
+                debounceTime(100), // Debounce to avoid excessive calculations
+                takeUntil(this.destroy$)
+            )
+            .subscribe(value => {
+                this.formValues.set(value);
+            });
+
+        // Initial form value
+        this.formValues.set(this.invoiceForm.value);
     }
 
     get itemsFormArray(): FormArray {
@@ -121,12 +150,15 @@ export class InvoiceGeneratorComponent implements OnInit {
 
     addProduct(): void {
         this.itemsFormArray.push(this.createItemFormGroup());
+        // Update form values signal immediately
+        this.formValues.set(this.invoiceForm.value);
     }
 
     removeProduct(index: number): void {
         if (this.itemsFormArray.length > 1) {
             this.itemsFormArray.removeAt(index);
-            this.calculateTotals();
+            // Update form values signal immediately
+            this.formValues.set(this.invoiceForm.value);
         }
     }
 
@@ -137,7 +169,7 @@ export class InvoiceGeneratorComponent implements OnInit {
             itemGroup.patchValue({
                 unitPrice: product.price
             });
-            this.calculateLineTotal(index);
+            // Form values will be updated automatically via valueChanges subscription
         }
     }
 
@@ -146,18 +178,21 @@ export class InvoiceGeneratorComponent implements OnInit {
         console.log('Customer selected:', customer);
     }
 
-    calculateLineTotal(index: number): void {
-        const itemGroup = this.getItemFormGroup(index);
-        const quantity = parseFloat(itemGroup.get('quantity')?.value) || 0;
-        const unitPrice = parseFloat(itemGroup.get('unitPrice')?.value) || 0;
-
-        // Trigger change detection by updating the form
-        setTimeout(() => this.calculateTotals(), 0);
+    // Helper methods for template display with proper formatting
+    getSubtotalFormatted(): string {
+        return this.subtotal().toFixed(2);
     }
 
-    calculateTotals(): void {
-        // This will trigger the computed signals to recalculate
-        this.invoiceForm.updateValueAndValidity();
+    getDiscountAmountFormatted(): string {
+        return this.discountAmount().toFixed(2);
+    }
+
+    getTotalAmountFormatted(): string {
+        return this.totalAmount().toFixed(2);
+    }
+
+    getBalanceAmountFormatted(): string {
+        return this.balanceAmount().toFixed(2);
     }
 
     getLineTotal(index: number): string {
@@ -259,5 +294,8 @@ export class InvoiceGeneratorComponent implements OnInit {
         }
 
         this.getItemFormGroup(0).reset();
+
+        // Update form values signal immediately
+        this.formValues.set(this.invoiceForm.value);
     }
 }

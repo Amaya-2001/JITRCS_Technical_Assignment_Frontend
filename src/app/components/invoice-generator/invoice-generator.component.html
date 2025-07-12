@@ -78,8 +78,7 @@
                                 <div class="form-field-extra-compact">
                                     <mat-form-field appearance="outline" class="full-width">
                                         <mat-label>Quantity</mat-label>
-                                        <input matInput type="number" formControlName="quantity" min="1"
-                                            (input)="calculateLineTotal(i)">
+                                        <input matInput type="number" formControlName="quantity" min="1">
                                         <mat-error *ngIf="getItemFormGroup(i).get('quantity')?.hasError('required')">
                                             Quantity is required
                                         </mat-error>
@@ -92,19 +91,19 @@
                                 <div class="form-field-extra-compact">
                                     <mat-form-field appearance="outline" class="full-width">
                                         <mat-label>Unit Price</mat-label>
-                                        <input matInput type="number" formControlName="unitPrice" min="0.01" step="0.01"
-                                            (input)="calculateLineTotal(i)">
+                                        <input matInput type="number" formControlName="unitPrice" min="0.01"
+                                            step="0.01">
                                         <mat-error *ngIf="getItemFormGroup(i).get('unitPrice')?.hasError('required')">
                                             Unit price is required
                                         </mat-error>
                                         <mat-error *ngIf="getItemFormGroup(i).get('unitPrice')?.hasError('min')">
-                                            Minimum price is $0.01 </mat-error>
+                                            Minimum price is 0.01 </mat-error>
                                     </mat-form-field>
                                 </div>
 
                                 <div class="flex flex-center">
                                     <div class="line-total text-lg font-weight-bold">
-                                        ${{getLineTotal(i)}}
+                                        {{getLineTotal(i)}}
                                     </div>
 
                                     <button mat-icon-button color="warn" type="button" (click)="removeProduct(i)"
@@ -132,7 +131,7 @@
                         <mat-form-field appearance="outline" class="full-width">
                             <mat-label>Discount (%)</mat-label>
                             <input matInput type="number" formControlName="discountPercentage" min="0" max="100"
-                                step="0.01" (input)="calculateTotals()">
+                                step="0.01">
                             <mat-error *ngIf="invoiceForm.get('discountPercentage')?.hasError('min')">
                                 Minimum discount is 0%
                             </mat-error>
@@ -145,8 +144,7 @@
                     <div class="form-field-compact">
                         <mat-form-field appearance="outline" class="full-width">
                             <mat-label>Paid Amount</mat-label>
-                            <input matInput type="number" formControlName="paidAmount" min="0" step="0.01"
-                                (input)="calculateTotals()">
+                            <input matInput type="number" formControlName="paidAmount" min="0" step="0.01">
                             <mat-error *ngIf="invoiceForm.get('paidAmount')?.hasError('min')">
                                 Paid amount cannot be negative
                             </mat-error>
@@ -157,25 +155,25 @@
                 <div class="totals-display card-surface p-4 mt-4">
                     <div class="total-row flex flex-between">
                         <span class="text-sm">Subtotal:</span>
-                        <span class="amount text-sm font-weight-bold">${{subtotal()}}</span>
+                        <span class="amount text-sm font-weight-bold">{{getSubtotalFormatted()}}</span>
                     </div>
                     <div class="total-row flex flex-between">
                         <span class="text-sm">Discount ({{invoiceForm.get('discountPercentage')?.value || 0}}%):</span>
-                        <span class="amount text-sm font-weight-bold">-${{discountAmount()}}</span>
+                        <span class="amount text-sm font-weight-bold">-{{getDiscountAmountFormatted()}}</span>
                     </div>
                     <div class="total-row total-final flex flex-between">
                         <span class="text-lg font-weight-bold">Total Amount:</span>
-                        <span class="amount text-lg font-weight-bold text-primary">${{totalAmount()}}</span>
+                        <span class="amount text-lg font-weight-bold text-primary">{{getTotalAmountFormatted()}}</span>
                     </div>
                     <div class="total-row flex flex-between">
                         <span class="text-sm">Paid Amount:</span>
-                        <span class="amount text-sm font-weight-bold">${{invoiceForm.get('paidAmount')?.value ||
+                        <span class="amount text-sm font-weight-bold">{{invoiceForm.get('paidAmount')?.value ||
                             0}}</span>
                     </div>
                     <div class="total-row balance-row flex flex-between">
                         <span class="text-sm">Balance Amount:</span>
                         <span class="amount text-sm font-weight-bold"
-                            [class.negative]="parseFloat(balanceAmount()) < 0">${{balanceAmount()}}</span>
+                            [class.negative]="balanceAmount() < 0">{{getBalanceAmountFormatted()}}</span>
                     </div>
                 </div>
             </div>
