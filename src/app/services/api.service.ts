@@ -80,7 +80,7 @@ export class ApiService {
     private handleError(error: HttpErrorResponse): Observable<never> {
         let errorMessage = 'An error occurred';
 
-        if (error.error instanceof ErrorEvent) {
+        if (error.error && typeof error.error === 'object' && 'message' in error.error) {
             // Client-side or network error
             errorMessage = `Error: ${error.error.message}`;
         } else {

@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal, computed, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Subject, takeUntil, debounceTime } from 'rxjs';
+import { Subject, takeUntil, debounceTime, firstValueFrom } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -206,9 +206,14 @@ export class InvoiceGeneratorComponent implements OnInit, OnDestroy {
     private async loadCustomers(): Promise<void> {
         try {
             this.loadingService.show();
-            const customers = await this.apiService.getCustomers().toPromise();
+            console.log('Starting to load customers...');
+            const customers = await firstValueFrom(this.apiService.getCustomers());
+            console.log('Customers loaded successfully:', customers);
             this.customers.set(customers || []);
         } catch (error) {
+            console.error('Customers loading failed with error:', error);
+            console.error('Error type:', typeof error);
+            console.error('Error constructor:', error?.constructor?.name);
             console.log('Failed to load customers:', error);
             this.notificationService.error('Failed to load customers: ' + (error as Error).message);
         } finally {
@@ -219,9 +224,14 @@ export class InvoiceGeneratorComponent implements OnInit, OnDestroy {
     private async loadProducts(): Promise<void> {
         try {
             this.loadingService.show();
-            const products = await this.apiService.getProducts().toPromise();
+            console.log('Starting to load products...');
+            const products = await firstValueFrom(this.apiService.getProducts());
+            console.log('Products loaded successfully:', products);
             this.products.set(products || []);
         } catch (error) {
+            console.error('Products loading failed with error:', error);
+            console.error('Error type:', typeof error);
+            console.error('Error constructor:', error?.constructor?.name);
             this.notificationService.error('Failed to load products: ' + (error as Error).message);
         } finally {
             this.loadingService.hide();
@@ -236,7 +246,7 @@ export class InvoiceGeneratorComponent implements OnInit, OnDestroy {
                 // Validate stock availability for all items
                 const items = this.invoiceForm.get('items')?.value;
                 for (const item of items) {
-                    const stockCheck = await this.apiService.checkStockAvailability(item.productId, item.quantity).toPromise();
+                    const stockCheck = await firstValueFrom(this.apiService.checkStockAvailability(item.productId, item.quantity));
                     if (!stockCheck?.isAvailable) {
                         const product = this.products().find(p => p.id === item.productId);
                         throw new Error(`Insufficient stock for ${product?.name || 'product'}`);
@@ -252,7 +262,7 @@ export class InvoiceGeneratorComponent implements OnInit, OnDestroy {
                     items: formValue.items
                 };
 
-                const result = await this.apiService.createInvoice(invoice).toPromise();
+                const result = await firstValueFrom(this.apiService.createInvoice(invoice));
 
                 if (result) {
                     this.notificationService.success(`Invoice ${result.invoiceNumber} created successfully!`);
