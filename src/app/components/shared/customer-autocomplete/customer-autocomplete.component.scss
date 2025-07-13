@@ -1,4 +1,5 @@
-/* Target the Material Design autocomplete panel directly */
+/* Target the Material Design autocomplete panel directly - Updated for MDC */
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel,
 ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel {
     max-height: 300px !important;
     background-color: #ffffff !important;
@@ -8,7 +9,10 @@
     overflow-y: auto !important;
 }
 
-/* Target each option directly with higher specificity */
+/* Target each option directly with higher specificity - Updated for MDC */
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option,
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-option,
+::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option,
 ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-option {
     background-color: #ffffff !important;
     color: rgba(0, 0, 0, 0.87) !important;
@@ -20,28 +24,47 @@
     position: relative !important;
 }
 
+/* Hover states - Updated for MDC */
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option:hover,
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-option:hover,
+::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option:hover,
 ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-option:hover {
     background-color: rgba(25, 118, 210, 0.08) !important;
     color: #1976d2 !important;
 }
 
+/* Selected states - Updated for MDC */
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option.mat-selected,
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-option.mat-selected,
+::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option.mat-selected,
 ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-option.mat-selected {
     background-color: rgba(25, 118, 210, 0.15) !important;
     color: #1976d2 !important;
 }
 
+/* Active states - Updated for MDC */
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option.mat-active,
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-option.mat-active,
+::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option.mat-active,
 ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-option.mat-active {
     background-color: rgba(25, 118, 210, 0.12) !important;
     color: #1976d2 !important;
 }
 
+/* Focus states - Updated for MDC */
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option:focus,
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-option:focus,
+::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option:focus,
 ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-option:focus {
     background-color: rgba(25, 118, 210, 0.1) !important;
     outline: 2px solid #1976d2 !important;
     outline-offset: -2px !important;
 }
 
-/* No options message */
+/* No options message - Updated for MDC */
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option.no-options,
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-option.no-options,
+::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option.no-options,
 ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-option.no-options {
     background-color: #f5f5f5 !important;
     text-align: center !important;
@@ -50,21 +73,25 @@
     cursor: default !important;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Updated for MDC */
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel::-webkit-scrollbar,
 ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel::-webkit-scrollbar {
     width: 6px;
 }
 
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel::-webkit-scrollbar-track,
 ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 3px;
 }
 
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel::-webkit-scrollbar-thumb,
 ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel::-webkit-scrollbar-thumb {
     background: #c1c1c1;
     border-radius: 3px;
 }
 
+::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel::-webkit-scrollbar-thumb:hover,
 ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
 }
@@ -91,10 +118,13 @@
 }
 
 ::ng-deep .customer-autocomplete-panel {
+
+    .mat-mdc-option:hover .customer-content .customer-name,
     .mat-option:hover .customer-content .customer-name {
         color: #1976d2 !important;
     }
 
+    .mat-mdc-option.mat-selected .customer-content .customer-name,
     .mat-option.mat-selected .customer-content .customer-name {
         color: #1976d2 !important;
         font-weight: 600 !important;
@@ -115,53 +145,76 @@
     width: 100%;
 }
 
-/* Dark theme support */
+/* Dark theme support - Updated for MDC */
 @media (prefers-color-scheme: dark) {
+
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel,
     ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel {
         background-color: #424242 !important;
         border-color: rgba(255, 255, 255, 0.12) !important;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
     }
 
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option,
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-option,
+    ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option,
     ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-option {
         background-color: #424242 !important;
         color: rgba(255, 255, 255, 0.87) !important;
         border-bottom-color: rgba(255, 255, 255, 0.08) !important;
     }
 
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option:hover,
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-option:hover,
+    ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option:hover,
     ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-option:hover {
         background-color: rgba(144, 202, 249, 0.12) !important;
         color: #90caf9 !important;
     }
 
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option.mat-selected,
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-option.mat-selected,
+    ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option.mat-selected,
     ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-option.mat-selected {
         background-color: rgba(144, 202, 249, 0.2) !important;
         color: #90caf9 !important;
     }
 
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option.mat-active,
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-option.mat-active,
+    ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option.mat-active,
     ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-option.mat-active {
         background-color: rgba(144, 202, 249, 0.16) !important;
         color: #90caf9 !important;
     }
 
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option:focus,
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-option:focus,
+    ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option:focus,
     ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-option:focus {
         background-color: rgba(144, 202, 249, 0.14) !important;
         outline-color: #90caf9 !important;
     }
 
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option.no-options,
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel .mat-option.no-options,
+    ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-mdc-option.no-options,
     ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel .mat-option.no-options {
         background-color: #303030 !important;
         color: rgba(255, 255, 255, 0.7) !important;
     }
 
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel::-webkit-scrollbar-track,
     ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel::-webkit-scrollbar-track {
         background: #303030;
     }
 
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel::-webkit-scrollbar-thumb,
     ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel::-webkit-scrollbar-thumb {
         background: #666666;
     }
 
+    ::ng-deep .mat-mdc-autocomplete-panel.customer-autocomplete-panel::-webkit-scrollbar-thumb:hover,
     ::ng-deep .mat-autocomplete-panel.customer-autocomplete-panel::-webkit-scrollbar-thumb:hover {
         background: #888888;
     }

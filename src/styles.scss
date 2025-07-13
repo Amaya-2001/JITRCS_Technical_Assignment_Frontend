@@ -806,3 +806,69 @@ mat-form-field input[type="number"] {
     font-family: 'Courier New', monospace !important;
     font-weight: 600 !important;
 }
+
+/* Global Autocomplete Panel Fix for Material Design 3 (MDC) */
+/* Ensure all autocomplete panels have proper background and visibility */
+.mat-mdc-autocomplete-panel,
+.mat-autocomplete-panel {
+    background-color: #ffffff !important;
+    border-radius: 4px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    z-index: 1000 !important;
+    position: fixed !important;
+}
+
+/* Ensure all autocomplete options have proper background */
+.mat-mdc-autocomplete-panel .mat-mdc-option,
+.mat-mdc-autocomplete-panel .mat-option,
+.mat-autocomplete-panel .mat-mdc-option,
+.mat-autocomplete-panel .mat-option {
+    background-color: #ffffff !important;
+    color: rgba(0, 0, 0, 0.87) !important;
+    min-height: 48px !important;
+    padding: 12px 16px !important;
+}
+
+/* Hover and interaction states */
+.mat-mdc-autocomplete-panel .mat-mdc-option:hover,
+.mat-mdc-autocomplete-panel .mat-option:hover,
+.mat-autocomplete-panel .mat-mdc-option:hover,
+.mat-autocomplete-panel .mat-option:hover {
+    background-color: rgba(25, 118, 210, 0.08) !important;
+}
+
+.mat-mdc-autocomplete-panel .mat-mdc-option.mat-selected,
+.mat-mdc-autocomplete-panel .mat-option.mat-selected,
+.mat-autocomplete-panel .mat-mdc-option.mat-selected,
+.mat-autocomplete-panel .mat-option.mat-selected {
+    background-color: rgba(25, 118, 210, 0.15) !important;
+}
+
+/* Ensure the mdc-menu-surface class also gets proper styling */
+.mdc-menu-surface {
+    background-color: #ffffff !important;
+}
+
+/* Dark theme support for global autocomplete styles */
+@media (prefers-color-scheme: dark) {
+
+    .mat-mdc-autocomplete-panel,
+    .mat-autocomplete-panel {
+        background-color: #424242 !important;
+        border-color: rgba(255, 255, 255, 0.12) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    .mat-mdc-autocomplete-panel .mat-mdc-option,
+    .mat-mdc-autocomplete-panel .mat-option,
+    .mat-autocomplete-panel .mat-mdc-option,
+    .mat-autocomplete-panel .mat-option {
+        background-color: #424242 !important;
+        color: rgba(255, 255, 255, 0.87) !important;
+    }
+
+    .mdc-menu-surface {
+        background-color: #424242 !important;
+    }
+}
