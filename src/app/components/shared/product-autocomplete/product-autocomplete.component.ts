@@ -110,7 +110,7 @@ export class ProductAutocompleteComponent implements ControlValueAccessor, OnIni
                     product.id.toString().includes(filterValue)
                 )
             )
-            .sort((a, b) => a.name.localeCompare(b.name))
+            .sort((a, b) => a.id - b.id) // Sort by ID in ascending order
             .slice(0, 50); // Limit results for performance
     }
 
