@@ -92,20 +92,6 @@ ng build --configuration production
 
 ## Application Features
 
-### Customer Management
-- View all customers in a data table
-- Add new customers with contact information
-- Edit existing customer details
-- Delete customers (with confirmation)
-- Search and filter customers
-
-### Product Management
-- Browse product catalog
-- Add new products with pricing and inventory
-- Update product information
-- Remove products from catalog
-- Category-based organization
-
 ### Invoice Management
 - Create new invoices with multiple line items
 - Select customers and products
@@ -118,7 +104,6 @@ ng build --configuration production
 - Professional invoice PDF layout
 - Company branding and information
 - Itemized billing details
-- Tax calculations
 - Customer and invoice information
 
 ## Project Structure
@@ -236,68 +221,6 @@ The application supports the following browsers:
 7. **Internet Connection**: Assumes stable internet connection for API calls
 8. **CORS**: Backend should have CORS configured for frontend domain
 
-## Troubleshooting
-
-### Common Issues
-
-1. **Node.js Version Issues**
-   ```bash
-   # Check Node.js version
-   node --version
-   # Should be 18.19.0 or later
-   ```
-
-2. **Angular CLI Issues**
-   ```bash
-   # Reinstall Angular CLI
-   npm uninstall -g @angular/cli
-   npm install -g @angular/cli@20.1.0
-   ```
-
-3. **Dependency Issues**
-   ```bash
-   # Clear npm cache
-   npm cache clean --force
-   
-   # Delete node_modules and reinstall
-   rm -rf node_modules package-lock.json
-   npm install
-   ```
-
-4. **Port Already in Use**
-   ```bash
-   # Use different port
-   ng serve --port 4201
-   ```
-
-5. **API Connection Issues**
-   - Verify backend server is running
-   - Check API URL in environment files
-   - Ensure CORS is configured on backend
-
-### Development Tools
-
-#### Recommended VS Code Extensions
-- Angular Language Service
-- Angular Snippets
-- TypeScript Hero
-- Auto Rename Tag
-- Prettier - Code formatter
-- ESLint
-
-#### Debugging
-- Use Angular DevTools browser extension
-- Enable source maps for debugging
-- Use browser developer tools for network inspection
-
-## Contributing
-
-1. Follow Angular style guide
-2. Use meaningful commit messages
-3. Write unit tests for new features
-4. Ensure code passes linting
-5. Test responsive design on different screen sizes
-
 ## Deployment
 
 ### Development Deployment
@@ -311,21 +234,3 @@ ng build --configuration production
 ```
 
 Deploy the contents of the `dist/` folder to your web server.
-
-### Environment Variables for CI/CD
-- `API_URL` - Backend API URL
-- `ENVIRONMENT` - Target environment (development/production)
-
-## License
-
-This project is developed for educational/assessment purposes.
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
