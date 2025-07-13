@@ -21,6 +21,7 @@ import { PdfService } from '../../services/pdf.service';
 import { Customer, Product, CreateInvoice, InvoiceItem } from '../../models/invoice.model';
 import { CustomerAutocompleteComponent } from '../shared/customer-autocomplete/customer-autocomplete.component';
 import { ProductAutocompleteComponent } from '../shared/product-autocomplete/product-autocomplete.component';
+import dayjs from 'dayjs';
 
 @Component({
     selector: 'app-invoice-generator',
@@ -244,7 +245,7 @@ export class InvoiceGeneratorComponent implements OnInit, OnDestroy {
                 const formValue = this.invoiceForm.value;
                 const invoice: CreateInvoice = {
                     customerId: formValue.customerId,
-                    transactionDate: formValue.transactionDate.toISOString(),
+                    transactionDate: dayjs(formValue.transactionDate).format('YYYY-MM-DD'),
                     discountPercentage: formValue.discountPercentage || 0,
                     paidAmount: formValue.paidAmount || 0,
                     items: formValue.items
