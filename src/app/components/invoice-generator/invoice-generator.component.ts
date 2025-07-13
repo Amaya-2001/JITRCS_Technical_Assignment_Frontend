@@ -209,6 +209,7 @@ export class InvoiceGeneratorComponent implements OnInit, OnDestroy {
             const customers = await this.apiService.getCustomers().toPromise();
             this.customers.set(customers || []);
         } catch (error) {
+            console.log('Failed to load customers:', error);
             this.notificationService.error('Failed to load customers: ' + (error as Error).message);
         } finally {
             this.loadingService.hide();
